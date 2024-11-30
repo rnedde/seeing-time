@@ -4,6 +4,8 @@
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
@@ -13,8 +15,14 @@
     <main>
     </main>
     <script src="sketch.js"></script>
-    <div id="canvas-container"></div>
+    <div type="module" id="canvas-container"></div>
     <button id="save-button">save</button>
+    <!-- <script>
+        const { initializeApp } = require("firebase/app");
+
+        const { getDatabase, ref, set, get, onValue, push } = require("firebase/database");
+        const firebaseDatabase = require("firebase/database");
+    </script> -->
 </body>
 
 </html>
