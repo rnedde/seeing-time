@@ -7,7 +7,7 @@ let isDrawing = false;
 let userName = "";
 
 function setup() {
-    let canvas = createCanvas(400, 400);
+    let canvas = createCanvas(500, 500);
 
     canvas.mousePressed(startPath);
     canvas.mouseReleased(endPath);

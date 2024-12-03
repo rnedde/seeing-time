@@ -5,9 +5,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-    
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
@@ -16,17 +16,27 @@
 <body>
     <main>
     </main>
-    <script src="sketch.js"></script>
-    <div type="module" id="canvas-container"></div>
-    <input id ="name" placeholder="Name">
-    <button id="save-button">save</button>
-    <button id="clear-button">clear</button>
-    <button id="undo-button">undo</button>
-    
-    <p id="warning">></p>
-    <ol id="drawing-list"></ol>
-    
+    <div class="container">
+        <h1>Time-Space Synesthesia Gallery</h1>
 
+        <hr>
+        <h2>If you experience time-space synesthesia, please submit a drawing of how you visualize time.</h2>
+        <div type="module" id="canvas-container"></div>
+
+        <div class="buttons">
+            <input id="name" placeholder="Name">
+            <button id="save-button">save</button>
+            <button id="clear-button">clear</button>
+            <button id="undo-button">undo</button>
+        </div>
+
+        <p id="warning">></p>
+        <h3>Click links below to see submissions.</h5>
+            <ol id="drawing-list"></ol>
+
+            <script src="sketch.js"></script>
+
+    </div>
 </body>
 
 </html>
