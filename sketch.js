@@ -31,8 +31,13 @@ function setup() {
 
     firebase.initializeApp(config);
     database = firebase.database();
+    let ref = database.ref('drawings');
+    ref.on('value', gotData, errData);
+
+
 
 }
+
 
 function startPath() {
     isDrawing = true;
@@ -49,8 +54,8 @@ function draw() {
 
     // Save points to drawing array
     if (isDrawing) {
-        let point = { x: mouseX, y: mouseY };
-        currentPath.push(point);
+        let myPoint = { x: mouseX, y: mouseY };
+        currentPath.push(myPoint);
     }
 
     // Loop to display drawing
@@ -68,11 +73,11 @@ function draw() {
 
 function saveDrawing() {
     const drawingsRef = database.ref('drawings');  // Reference to the 'drawings' node in the database
-    const data = {
+    let data = {
         name: "Rev",
         drawing: drawing
     };
-    
+
 
     drawingsRef.push(data)  // Push the data to the database
         .then((snapshot) => {
@@ -81,4 +86,22 @@ function saveDrawing() {
         .catch((error) => {
             console.error("Error saving drawing:", error);
         });
+}
+function gotData(data) {
+    let drawings = data.val();
+    if (!drawings) {
+        console.log('No data found in the drawings node!');
+        return;
+    }
+    var keys = Object.keys(drawings);
+    console.log('Keys:', keys);
+    for (let i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        console.log('Key:', key, 'Data:', drawings[key]);
+    }
+}
+
+function errData(err) {
+    console.log('Error!');
+    console.log(err);
 }
