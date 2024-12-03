@@ -1,11 +1,10 @@
-
-
-var database;
+let database;
 
 // Variables for Drawing
 let drawing = [];
 let currentPath = [];
 let isDrawing = false;
+let userName = "";
 
 function setup() {
     let canvas = createCanvas(400, 400);
@@ -17,6 +16,13 @@ function setup() {
     let saveButton = select("#save-button");
     saveButton.mousePressed(saveDrawing);
 
+    let clearButton = select("#clear-button");
+    clearButton.mousePressed(clearDrawing);
+
+    let undoButton = select("#undo-button");
+    undoButton.mousePressed(function(){
+        drawing.pop();
+    })
     // Your web app's Firebase configuration
     const config = {
         apiKey: "AIzaSyBQTe_Pn-hreXMg3HD-v9ODtmSGfUNMx9w",
@@ -33,9 +39,6 @@ function setup() {
     database = firebase.database();
     let ref = database.ref('drawings');
     ref.on('value', gotData, errData);
-
-
-
 }
 
 
@@ -72,9 +75,12 @@ function draw() {
 }
 
 function saveDrawing() {
+    console.log("drawing length: " + drawing.length);
+    // userName = select("#name").value;
+    if(drawing.length >=1){
     const drawingsRef = database.ref('drawings');  // Reference to the 'drawings' node in the database
     let data = {
-        name: "Rev",
+        name: "name",
         drawing: drawing
     };
 
@@ -82,11 +88,20 @@ function saveDrawing() {
     drawingsRef.push(data)  // Push the data to the database
         .then((snapshot) => {
             console.log("Drawing saved with key:", snapshot.key);
+            // console.log("Drawing saved with name:", userName);
         })
         .catch((error) => {
             console.error("Error saving drawing:", error);
         });
+
+    clearDrawing();
+    }else{
+        const noDrawing = select('#warning');
+        noDrawing.html('Blank drawing!')
+    }
 }
+
+
 function gotData(data) {
     let drawings = data.val();
     if (!drawings) {
@@ -95,13 +110,48 @@ function gotData(data) {
     }
     var keys = Object.keys(drawings);
     console.log('Keys:', keys);
+
+
+    //clear list before adding new items
+    const drawingList = select('#drawing-list');
+    drawingList.html('');
+
+    //add drawings to list
     for (let i = 0; i < keys.length; i++) {
         var key = keys[i];
         console.log('Key:', key, 'Data:', drawings[key]);
+
+        let li = createElement('li', '');
+        var ahref = createA('#', key);
+        ahref.mousePressed(showDrawing);
+        ahref.parent(li);
+        li.parent(drawingList)
+
     }
 }
 
 function errData(err) {
     console.log('Error!');
     console.log(err);
+}
+
+function showDrawing() {
+
+    var key = this.html();
+
+    var ref = database.ref('drawings/' + key);
+    ref.once('value', oneDrawing, errData);
+
+    function oneDrawing(data) {
+        var dbdrawing = data.val();
+        drawing = dbdrawing.drawing;
+        //console.log(drawing);
+    }
+
+}
+
+function clearDrawing() {
+    drawing = [];
+    const warning = select('#warning');
+    warning.html('>')
 }
