@@ -21,14 +21,29 @@
 
         <hr>
         <h2>If you experience time-space synesthesia, please submit a drawing of how you visualize time.</h2>
-        <div type="module" id="canvas-container"></div>
+        <div class="container">
+            <div class="user-inputs">
+                <div type="module" id="canvas-container"></div>
+                <div class="text-inputs">
+                    <input id="name" placeholder="Name">
+                    <input id="unit" placeholder="Unit of time (day, year, hour, second, month)">
+                    <input id="description" placeholder="description, explanation, thoughts, feelings, etc">
+                </div>
 
-        <div class="buttons">
-            <input id="name" placeholder="Name">
-            <button id="save-button">save</button>
-            <button id="clear-button">clear</button>
-            <button id="undo-button">undo</button>
+                <button id="save-button">save</button>
+
+            </div>
+
+
+            <div class="drawing-tools">
+                <button id="clear-button">clear</button>
+                <button id="undo-button">undo</button>
+            </div>
+
+
+
         </div>
+
 
         <p id="warning">></p>
         <h3>Click links below to see submissions.</h5>

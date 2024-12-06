@@ -5,6 +5,8 @@ let drawing = [];
 let currentPath = [];
 let isDrawing = false;
 let userName = "";
+let unitOfTime = "";
+let userDescription = "";
 
 function setup() {
     let canvas = createCanvas(500, 500);
@@ -17,10 +19,14 @@ function setup() {
     saveButton.mousePressed(saveDrawing);
 
     let clearButton = select("#clear-button");
-    clearButton.mousePressed(clearDrawing);
+    clearButton.mousePressed(function () {
+        drawing = [];
+        const warning = select('#warning');
+        warning.html('>')
+    });
 
     let undoButton = select("#undo-button");
-    undoButton.mousePressed(function(){
+    undoButton.mousePressed(function () {
         drawing.pop();
     })
     // Your web app's Firebase configuration
@@ -75,31 +81,45 @@ function draw() {
 }
 
 function saveDrawing() {
+    userName = select("#name").value();  // Get the name input from the text field
+    userDescription = select("#description").value();
+    unitOfTime = select("#unit").value();
+
+
+    // Check if the name field is blank
+    if (userName.trim() === "") {
+        // Display a warning if the name is empty
+        const noNameWarning = select('#warning');
+        noNameWarning.html('Please enter your name before saving the drawing.');
+        return;  // Prevent saving the drawing
+    }
+
     console.log("drawing length: " + drawing.length);
-    // userName = select("#name").value;
-    if(drawing.length >=1){
-    const drawingsRef = database.ref('drawings');  // Reference to the 'drawings' node in the database
-    let data = {
-        name: "name",
-        drawing: drawing
-    };
 
+    if (drawing.length >= 1) {
+        const drawingsRef = database.ref('drawings');  // Reference to the 'drawings' node in the database
+        let data = {
+            name: userName,
+            drawing: drawing,
+            unit: unitOfTime,
+            description: userDescription
+        };
 
-    drawingsRef.push(data)  // Push the data to the database
-        .then((snapshot) => {
-            console.log("Drawing saved with key:", snapshot.key);
-            // console.log("Drawing saved with name:", userName);
-        })
-        .catch((error) => {
-            console.error("Error saving drawing:", error);
-        });
-
-    clearDrawing();
-    }else{
+        drawingsRef.push(data)  // Push the data to the database
+            .then((snapshot) => {
+                console.log("Drawing saved with key:", snapshot.key);
+                clearDrawing();  // Clear the canvas after saving the drawing
+            })
+            .catch((error) => {
+                console.error("Error saving drawing:", error);
+            });
+    } else {
         const noDrawing = select('#warning');
-        noDrawing.html('Blank drawing!')
+        noDrawing.html('Please draw something before saving!');
     }
 }
+
+
 
 
 function gotData(data) {
@@ -108,50 +128,66 @@ function gotData(data) {
         console.log('No data found in the drawings node!');
         return;
     }
-    var keys = Object.keys(drawings);
+    let keys = Object.keys(drawings);
     console.log('Keys:', keys);
 
-
-    //clear list before adding new items
+    // Clear the list before adding new items
     const drawingList = select('#drawing-list');
     drawingList.html('');
 
-    //add drawings to list
+    // Add each drawing to the list
     for (let i = 0; i < keys.length; i++) {
-        var key = keys[i];
+        let key = keys[i];
         console.log('Key:', key, 'Data:', drawings[key]);
 
         let li = createElement('li', '');
-        var ahref = createA('#', key);
-        ahref.mousePressed(showDrawing);
-        ahref.parent(li);
-        li.parent(drawingList)
+        let drawingData = drawings[key];
+        let name = drawingData.name;  // Get the name from the data
 
+        // Create a link with the user's name
+        let ahref = createA('#', name);
+        ahref.mousePressed(() => showDrawing(key));  // When clicked, load the specific drawing
+        ahref.parent(li);
+        li.parent(drawingList);
     }
 }
+
 
 function errData(err) {
     console.log('Error!');
     console.log(err);
 }
 
-function showDrawing() {
-
-    var key = this.html();
-
+function showDrawing(key) {
     var ref = database.ref('drawings/' + key);
-    ref.once('value', oneDrawing, errData);
+    ref.once('value', (data) => {
+        var dbDrawing = data.val();
+        drawing = dbDrawing.drawing;  // Get the drawing data
+        userName = dbDrawing.name;    // Get the user's name (if needed for display)
 
-    function oneDrawing(data) {
-        var dbdrawing = data.val();
-        drawing = dbdrawing.drawing;
-        //console.log(drawing);
-    }
-
+        // Redraw the saved drawing on the canvas
+        redrawCanvas();  // Custom function to redraw the canvas (you'll need to implement this)
+    }, errData);
 }
 
+function redrawCanvas() {
+    clear();  // Clear the current canvas
+
+    // Loop through the saved drawing array and redraw
+    for (let path of drawing) {
+        beginShape();
+        for (let point of path) {
+            vertex(point.x, point.y);
+        }
+        endShape();
+    }
+}
+
+
 function clearDrawing() {
-    drawing = [];
-    const warning = select('#warning');
-    warning.html('>')
+    drawing = [];  // Clear the drawing array
+    currentPath = [];  // Clear the current path
+    userName = "";  // Optionally, clear the user name input
+    select("#name").value('');  // Clear the name input field
+    select('#warning').html('');  // Reset any warning text
 }
