@@ -102,7 +102,7 @@ function saveDrawing() {
             name: userName,
             drawing: drawing,
             unit: unitOfTime,
-            description: userDescription
+            description: userDescription,
         };
 
         drawingsRef.push(data)  // Push the data to the database
@@ -111,7 +111,7 @@ function saveDrawing() {
                 clearDrawing();  // Clear the canvas after saving the drawing
             })
             .catch((error) => {
-                console.error("Error saving drawing:", error);
+                console .error("Error saving drawing:", error);
             });
     } else {
         const noDrawing = select('#warning');
