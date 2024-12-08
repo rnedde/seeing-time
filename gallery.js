@@ -8,10 +8,13 @@ let userName = "";
 let unitOfTime = "";
 let userDescription = "";
 
-function setup() {
-    let canvas = createCanvas(500, 500);
 
-    canvas.parent('#canvas-container');
+let baseCanvasSize = 500; // Original size
+let canvas;
+
+function setup() {
+    
+
 
     // Your web app's Firebase configuration
     const config = {
@@ -67,10 +70,10 @@ function gotData(data) {
         // Create a new p5 sketch for each drawing
         let sketchContainer = new p5((sketch) => {
             sketch.setup = () => {
-                let canvas = sketch.createCanvas(500, 500);
+                let canvas = sketch.createCanvas(baseCanvasSize, baseCanvasSize);
                 canvas.parent(canvasContainer); // Attach to the current container div
-
                 sketch.noLoop(); // No continuous drawing
+                // sketch.windowResized();
             };
 
             sketch.draw = () => {
@@ -92,6 +95,9 @@ function gotData(data) {
         });
 
         // Add the additional information below the canvas
+
+        // Display user name above the canvas
+
         let info = createDiv()
 
             .addClass('details')
@@ -136,3 +142,10 @@ function redrawCanvas() {
     }
 }
 
+
+function windowResized() {
+    // Make the canvas square and responsive
+    let size = min(windowWidth, windowHeight) * 0.8;
+    resizeCanvas(size, size); // Adjust the canvas size
+    redrawCanvas();
+}
