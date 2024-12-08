@@ -116,8 +116,8 @@ input{
     width:200px;
 }
 #description{
-    width:300px;
-    height:100px;
+    width:20rem;
+    height:10rem;
     text-align:left;
     font-family:'Courier New', Courier, monospace
 }
@@ -126,6 +126,9 @@ input{
     margin:.2rem;
 }
 
+#warning{
+    width:20rem;
+}
 /* gallery styles */
 
 .canvas-container{
