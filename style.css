@@ -1,0 +1,93 @@
+
+/* Set the font for the entire page */
+body {
+    font-family: 'Courier New', Courier, monospace, sans-serif; /* Fallback to sans-serif if Arial isn't available */
+}
+
+h1, h2, h3{
+    text-align:center;
+}
+
+.button-container{
+    display:flex;
+    justify-content:center;
+}
+
+.button {
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    display: inline-block;          /* Makes the link behave like a block element */
+    margin: 3px;
+    padding: 10px 20px;             /* Adds padding inside the button */
+    background-color: #4CAF50;      /* Button background color */
+    color: white;                   /* Text color */
+    text-align: center;             /* Centers text inside the link */
+    text-decoration: none;          /* Removes the underline */
+    border-radius: 5px;             /* Rounds the corners */
+    border: 1px solid black; /* Add a black border */
+    font-size: 16px;                /* Text size */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow effect */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+/* Add hover effect */
+.button:hover {
+    background-color: #45a049;      /* Darker shade of green on hover */
+    transform: translateY(-2px);    /* Gives a slight lift effect on hover */
+}
+
+/* Add active effect (when clicked) */
+.button:active {
+    background-color: #388e3c;      /* Even darker green on click */
+    transform: translateY(0);       /* Returns to normal position */
+}
+
+input{
+    font-family:'Courier New', Courier, monospace;
+}
+
+
+
+
+/*Drawing app styles*/
+
+
+.user-inputs{
+    display:flex;
+    flex-wrap: wrap; /* Allows the divs to wrap onto a new line */
+}
+
+.text-inputs{
+    display:flex;
+    flex-direction:column;
+    margin:10px;
+}
+
+#canvas-container{
+    width:90%;
+}
+
+#name{
+    width:100px;
+}
+#unit{
+    width:200px;
+}
+#description{
+    width:300px;
+    height:100px;
+    text-align:left;
+    font-family:'Courier New', Courier, monospace
+}
+
+/* gallery styles */
+
+.canvas-container{
+    display:flex;
+    justify-content: center;
+    margin:20px;
+}
+
+.details{
+    width:40%;
+    margin: 20px;
+}

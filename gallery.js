@@ -51,38 +51,36 @@ function gotData(data) {
     for (let i = keys.length - 1; i >= 0; i--) {
         let key = keys[i];
         console.log('Key:', key, 'Data:', drawings[key]);
-    
+
         let drawingData = drawings[key];
         let name = drawingData.name; // Get the name from the data
         let points = drawingData.drawing; // Array of points for the drawing
         let description = drawingData.description || "No description provided."; // Additional info
         let unit = drawingData.unit || "Unknown unit"; // Unit of time
-    
+
         // Create a new div to hold the canvas and user information
         let canvasContainer = createDiv().addClass('canvas-container');
         canvasContainer.parent('#drawing-list'); // Append to the gallery container
-    
-        // Display user name above the canvas
-        let userName = createElement('h3', name);
-        userName.parent(canvasContainer);
-    
+
+
+
         // Create a new p5 sketch for each drawing
         let sketchContainer = new p5((sketch) => {
             sketch.setup = () => {
                 let canvas = sketch.createCanvas(500, 500);
                 canvas.parent(canvasContainer); // Attach to the current container div
-    
+
                 sketch.noLoop(); // No continuous drawing
             };
-    
+
             sketch.draw = () => {
                 sketch.background(240);
-    
+
                 // Draw the saved drawing
                 sketch.noFill();
                 sketch.stroke(0);
                 sketch.strokeWeight(2);
-    
+
                 for (let path of points) {
                     sketch.beginShape();
                     for (let point of path) {
@@ -92,15 +90,21 @@ function gotData(data) {
                 }
             };
         });
-    
+
         // Add the additional information below the canvas
         let info = createDiv()
+
             .addClass('details')
-            .html(`<p><strong>Description:</strong> ${description}</p>
+            .html(`<p><strong>Name:</strong>${name}</p>
+                    <p><strong>Description:</strong> ${description}</p>
                    <p><strong>Unit:</strong> ${unit}</p>`);
+
+
         info.parent(canvasContainer);  // Append the info below the canvas
+
+
     }
-    
+
 }
 function errData(err) {
     console.log('Error!');

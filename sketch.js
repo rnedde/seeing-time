@@ -16,13 +16,15 @@ function setup() {
     canvas.parent('#canvas-container');
 
     let saveButton = select("#save-button");
+
     saveButton.mousePressed(saveDrawing);
+    saveButton.mousePressed
 
     let clearButton = select("#clear-button");
     clearButton.mousePressed(function () {
         drawing = [];
         const warning = select('#warning');
-        warning.html('>')
+        warning.html('')
     });
 
     let undoButton = select("#undo-button");
@@ -190,4 +192,6 @@ function clearDrawing() {
     userName = "";  // Optionally, clear the user name input
     select("#name").value('');  // Clear the name input field
     select('#warning').html('');  // Reset any warning text
+    select("#description").value('');  // Clear the desc input field
+    select("#unit").value('');  // Clear the unit input field
 }

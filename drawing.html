@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
-
+    <title>Drawing</title>
 </head>
 
 <body>
@@ -21,35 +21,35 @@
 
         <hr>
         <h2>If you experience time-space synesthesia, please submit a drawing of how you visualize time.</h2>
-        <div class="container">
             <div class="user-inputs">
-                <div type="module" id="canvas-container"></div>
-                <div class="text-inputs">
-                    <input id="name" placeholder="Name">
-                    <input id="unit" placeholder="Unit of time (day, year, hour, second, month)">
-                    <input id="description" placeholder="description, explanation, thoughts, feelings, etc">
+
+                <div>
+                    <div type="module" id="canvas-container"></div>
+
+                    <div class="drawing-tools">
+                        <button class="button" id="clear-button">clear</button>
+                        <button class="button" id="undo-button">undo</button>
+                    </div>
                 </div>
 
-                <button id="save-button">save</button>
+
+                <div class="text-inputs">
+                    <input id="name" placeholder="Name">
+                    <input id="unit" placeholder="Unit of time">
+                    <textarea id="description" placeholder="Description, explanation, thoughts, feelings, etc"></textarea>
+
+                    <div class="finished-buttons">
+                        <button class="button" id="save-button" href="gallery.js">save</button>
+                        <a class="button" id="gallery-button" href="gallery.html">View Gallery</a>
+                    </div>
+                </div>
 
             </div>
 
 
-            <div class="drawing-tools">
-                <button id="clear-button">clear</button>
-                <button id="undo-button">undo</button>
-            </div>
+        <p id="warning"></p>
 
-
-
-        </div>
-
-
-        <p id="warning">></p>
-        <h3>Click links below to see submissions.</h5>
-            <ol id="drawing-list"></ol>
-
-            <script src="sketch.js"></script>
+        <script src="sketch.js"></script>
 
     </div>
 </body>
