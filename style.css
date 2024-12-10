@@ -15,10 +15,10 @@ body {
 }
 
 .scroll-start{
-    height:300vh;
+    height:700vh;
 }
 .scroll-yes, .scroll-no{
-    height: 500vh;
+    height: 400vh;
 }
 
 .scroll-idk{
@@ -59,6 +59,7 @@ h1, h2, h3{
 .button:hover {
     background-color: #45a049;      /* Darker shade of green on hover */
     transform: translateY(-.1rem);    /* Gives a slight lift effect on hover */
+    cursor:pointer;
 }
 
 /* Add active effect (when clicked) */
@@ -77,6 +78,12 @@ input{
 .fade-in{
     opacity:0;
     animation: fadeInEffect 2s ease-in-out forwards;
+}
+.fade-in-delay{
+    
+    opacity:0;
+    animation: fadeInEffect 2s ease-in-out forwards;
+    animation-delay: 1s;
 }
 
 @keyframes fadeInEffect{
