@@ -1,3 +1,6 @@
+
+// javascript to help with auto-scroll in html pages
+
 // Function to scroll the page to the next element
 function scrollToNextElement(currentElement) {
     const nextElement = currentElement.nextElementSibling;
