@@ -3,156 +3,189 @@ html {
 }
 
 body {
-    font-family: 'Courier New', Courier, monospace, sans-serif; /* Fallback to sans-serif if Arial isn't available */
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    /* Fallback to sans-serif if Arial isn't available */
+}
+h1{
+    font-size: 3rem;
+}
+.scroll-start,
+.scroll-yes,
+.scroll-no,
+.scroll-idk {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.scroll-start, .scroll-yes, .scroll-no, .scroll-idk{
-    
-    display:flex;
-    flex-direction:column;
-    justify-content:space-around;
-    align-items:center;
+.scroll-start {
+    height: 700vh;
 }
 
-.scroll-start{
-    height:700vh;
-}
-.scroll-yes, .scroll-no{
+.scroll-yes,
+.scroll-no {
     height: 400vh;
 }
 
-.scroll-idk{
+.scroll-idk {
     height: 300vh;
 }
 
 
 
-h1, h2, h3{
-    text-align:center;
-    width:60%;
+h1,
+h2,
+h3 {
+    text-align: center;
+    width: 60%;
 }
 
-.button-container{
-    display:flex;
-    justify-content:center;
-    justify-content:space-evenly;
+.button-container {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
     width: 50%;
 }
 
 .button {
     font-family: 'Courier New', Courier, monospace, sans-serif;
-    display: inline-block;          /* Makes the link behave like a block element */
+    display: inline-block;
+    /* Makes the link behave like a block element */
     margin: .3rem;
-    padding: .5rem 1rem;             /* Adds padding inside the button */
-    background-color: #4CAF50;      /* Button background color */
-    color: white;                   /* Text color */
-    text-align: center;             /* Centers text inside the link */
-    text-decoration: none;          /* Removes the underline */
-    border-radius: .4rem;             /* Rounds the corners */
-    border: .01rem solid black; /* Add a black border */
-    font-size: 1rem;                /* Text size */
-    box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.1); /* Adds a shadow effect */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    padding: .5rem 1rem;
+    /* Adds padding inside the button */
+    background-color: #4CAF50;
+    /* Button background color */
+    color: white;
+    /* Text color */
+    text-align: center;
+    /* Centers text inside the link */
+    text-decoration: none;
+    /* Removes the underline */
+    border-radius: .4rem;
+    /* Rounds the corners */
+    border: .01rem solid black;
+    /* Add a black border */
+    font-size: 1rem;
+    /* Text size */
+    box-shadow: 0 .2rem .4rem rgba(0, 0, 0, 0.1);
+    /* Adds a shadow effect */
+    transition: background-color 0.3s, transform 0.3s;
+    /* Smooth transition */
 }
 
 /* Add hover effect */
 .button:hover {
-    background-color: #45a049;      /* Darker shade of green on hover */
-    transform: translateY(-.1rem);    /* Gives a slight lift effect on hover */
-    cursor:pointer;
+    background-color: #45a049;
+    /* Darker shade of green on hover */
+    transform: translateY(-.1rem);
+    /* Gives a slight lift effect on hover */
+    cursor: pointer;
 }
 
 /* Add active effect (when clicked) */
 .button:active {
-    background-color: #388e3c;      /* Even darker green on click */
-    transform: translateY(0);       /* Returns to normal position */
+    background-color: #388e3c;
+    /* Even darker green on click */
+    transform: translateY(0);
+    /* Returns to normal position */
 }
 
-input{
-    font-family:'Courier New', Courier, monospace;
+input {
+    font-family: 'Courier New', Courier, monospace;
 }
 
 
 
 /* animations */
-.fade-in{
-    opacity:0;
+.fade-in {
+    opacity: 0;
     animation: fadeInEffect 2s ease-in-out forwards;
 }
-.fade-in-delay{
-    
-    opacity:0;
+
+.fade-in-delay {
+
+    opacity: 0;
     animation: fadeInEffect 2s ease-in-out forwards;
     animation-delay: 1s;
 }
 
-@keyframes fadeInEffect{
-    0%{
-        opacity:0;
+@keyframes fadeInEffect {
+    0% {
+        opacity: 0;
     }
-    100%{
-        opacity:1;
+
+    100% {
+        opacity: 1;
     }
 }
 
 /*Drawing app styles*/
 
 
-.user-inputs{
-    display:flex;
-    flex-wrap: wrap; /* Allows the divs to wrap onto a new line */
-    justify-content:center;
+.user-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allows the divs to wrap onto a new line */
+    justify-content: center;
 }
 
-.text-inputs{
-    display:flex;
-    flex-direction:column;
-    margin:1rem;
+.text-inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
 }
 
-.center-container{
-    display:flex;
+.center-container {
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#name{
-    width:100px;
-}
-#unit{
-    width:200px;
-}
-#description{
-    width:20rem;
-    height:10rem;
-    text-align:left;
-    font-family:'Courier New', Courier, monospace
+#name {
+    width: 10rem;
 }
 
-#name,#unit,#description{
-    margin:.2rem;
+#unit {
+    width: 22rem;
 }
 
-#warning{
-    width:20rem;
+#description {
+    width: 24rem;
+    height: 10rem;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace
 }
+
+#name,
+#unit,
+#description {
+    margin: .2rem;
+}
+
+#warning {
+    width: 20rem;
+}
+
 /* gallery styles */
 
-.canvas-container{
-    width:90%;
-    display:flex;
+.canvas-container {
+    width: 90%;
+    display: flex;
     justify-content: center;
-    margin:20px;
-}
-
-.details{
-    width:30%;
     margin: 20px;
 }
 
-.gallery-container{
-    display:flex;
-    flex-wrap:wrap;
+.details {
+    width: 30%;
+    margin: 20px;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .canvas-container {
@@ -166,7 +199,8 @@ input{
 
 .details {
     flex: 1;
-    margin-right: 20px; /* Add space between details and canvas */
+    margin-right: 20px;
+    /* Add space between details and canvas */
 }
 
 .placeholder {
@@ -178,4 +212,14 @@ input{
 canvas {
     max-width: 500px;
     width: 100%;
+}
+
+#gallery-button {
+    visibility: hidden;
+}
+
+.sticky {
+    position: fixed;
+    bottom: 0;
+    margin:1rem;
 }

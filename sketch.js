@@ -17,8 +17,9 @@ function setup() {
 
     let saveButton = select("#save-button");
 
+
     saveButton.mousePressed(saveDrawing);
-    saveButton.mousePressed
+    // saveButton.mousePressed
 
     let clearButton = select("#clear-button");
     clearButton.mousePressed(function () {
@@ -87,6 +88,10 @@ function saveDrawing() {
     userDescription = select("#description").value();
     unitOfTime = select("#unit").value();
 
+    let galleryButton = select("#gallery-button");
+
+    galleryButton.style("visibility", "visible")
+    
 
     // Check if the name field is blank
     if (userName.trim() === "") {
@@ -106,6 +111,9 @@ function saveDrawing() {
             unit: unitOfTime,
             description: userDescription,
         };
+        const warning = select('#warning');
+        warning.html('Drawing Saved!')
+
 
         drawingsRef.push(data)  // Push the data to the database
             .then((snapshot) => {
@@ -113,7 +121,7 @@ function saveDrawing() {
                 clearDrawing();  // Clear the canvas after saving the drawing
             })
             .catch((error) => {
-                console .error("Error saving drawing:", error);
+                console.error("Error saving drawing:", error);
             });
     } else {
         const noDrawing = select('#warning');
@@ -191,7 +199,7 @@ function clearDrawing() {
     currentPath = [];  // Clear the current path
     userName = "";  // Optionally, clear the user name input
     select("#name").value('');  // Clear the name input field
-    select('#warning').html('');  // Reset any warning text
+    // select('#warning').html('');  // Reset any warning text
     select("#description").value('');  // Clear the desc input field
     select("#unit").value('');  // Clear the unit input field
 }
