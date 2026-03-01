@@ -9,6 +9,7 @@ let unitOfTime = "";
 let userDescription = "";
 
 let baseCanvasSize = 500; // Original size
+let loadingInterval;
 
 function setup() {
     // Your web app's Firebase configuration
@@ -24,11 +25,23 @@ function setup() {
 
     firebase.initializeApp(config);
     database = firebase.database();
+
+    let dotCount = 0;
+    const spinner = document.getElementById('loading-spinner');
+    if (spinner) {
+        spinner.textContent = 'Loading.';
+        loadingInterval = setInterval(() => {
+            dotCount = (dotCount % 3) + 1;
+            spinner.textContent = 'Loading' + '.'.repeat(dotCount);
+        }, 500);
+    }
+
     let ref = database.ref('drawings');
     ref.on('value', gotData, errData);
 }
 
 function gotData(data) {
+    clearInterval(loadingInterval);
     const spinner = document.getElementById('loading-spinner');
     if (spinner) spinner.style.display = 'none';
     let drawings = data.val();
@@ -112,6 +125,7 @@ function setupLazyLoading(placeholder, points, canvasContainer) {
 }
 
 function errData(err) {
+    clearInterval(loadingInterval);
     const spinner = document.getElementById('loading-spinner');
     if (spinner) spinner.style.display = 'none';
     console.log('Error!');
