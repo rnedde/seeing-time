@@ -29,7 +29,8 @@ function setup() {
 }
 
 function gotData(data) {
-    document.getElementById('loading-spinner').style.display = 'none';
+    const spinner = document.getElementById('loading-spinner');
+    if (spinner) spinner.style.display = 'none';
     let drawings = data.val();
     if (!drawings) {
         console.log('No data found in the drawings node!');
@@ -111,7 +112,8 @@ function setupLazyLoading(placeholder, points, canvasContainer) {
 }
 
 function errData(err) {
-    document.getElementById('loading-spinner').style.display = 'none';
+    const spinner = document.getElementById('loading-spinner');
+    if (spinner) spinner.style.display = 'none';
     console.log('Error!');
     console.log(err);
 }
